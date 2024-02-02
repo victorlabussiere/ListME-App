@@ -22,7 +22,19 @@ public class UserModel{
     public UserModel() {
     }
 
-    public UserModel(String name, String email, String password, String s) {
+    public UserModel(UserModel u) {
+        this.id = u.getId();
+        this.name = u.getName();
+        this.email = u.getEmail();
+        this.password = u.getPassword();
+        this.userRole = u.getUserRole();
+    }
+
+    public UserModel(String name, String email, String password, String userRole) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.userRole = userRole;
     }
 
     public Long getId() {
