@@ -2,7 +2,8 @@ package com.listme.api.web.users;
 
 import com.listme.api.models.UserModel;
 import com.listme.api.web.errors.EmailInUseException;
-import com.listme.api.web.errors.PasswordExceptions;
+import com.listme.api.web.errors.InvalidPasswordException;
+import com.listme.api.web.errors.NullPasswordException;
 import com.listme.api.web.errors.UserNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,9 +49,9 @@ public class UserService{
     }
 
     public UserModel updateUserPassword(Long id, UpdateUserPasswordDTO updateUserPasswordDTO) {
-        if(updateUserPasswordDTO.oldPassword() == null) throw new PasswordExceptions();
+        if(updateUserPasswordDTO.oldPassword() == null || updateUserPasswordDTO.newPassword() == null) throw new NullPasswordException();
         UserModel user = this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        PasswordExceptions.validatePassword(encoder.matches(updateUserPasswordDTO.oldPassword(), user.getPassword()));
+        if (!encoder.matches(updateUserPasswordDTO.oldPassword(), user.getPassword())) throw new InvalidPasswordException();
         String newPassword = encoder.encode(updateUserPasswordDTO.newPassword());
         user.setPassword(newPassword);
         return this.userRepository.save(user);

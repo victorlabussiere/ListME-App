@@ -1,7 +1,8 @@
 package com.listme.api.web.users;
 
 import com.listme.api.web.errors.EmailInUseException;
-import com.listme.api.web.errors.PasswordExceptions;
+import com.listme.api.web.errors.InvalidPasswordException;
+import com.listme.api.web.errors.NullPasswordException;
 import com.listme.api.web.errors.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +21,7 @@ public class UserAdvices {
     }
 
     @ResponseBody
-    @ExceptionHandler(PasswordExceptions.class)
+    @ExceptionHandler(NullPasswordException.class)
     @ResponseStatus(HttpStatus.NOT_MODIFIED)
     public String nullPasswordHandler(UserNotFoundException err) {
         return err.getMessage();
@@ -32,4 +33,12 @@ public class UserAdvices {
     public String emailInUseHandler(UserNotFoundException err) {
         return err.getMessage();
     }
+
+    @ResponseBody
+    @ExceptionHandler(InvalidPasswordException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String invalidPasswordHandler (InvalidPasswordException err) {
+        return err.getMessage();
+    }
+
 }

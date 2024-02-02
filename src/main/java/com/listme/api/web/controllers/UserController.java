@@ -2,6 +2,7 @@ package com.listme.api.web.controllers;
 
 import com.listme.api.models.UserModel;
 import com.listme.api.web.errors.EmailInUseException;
+import com.listme.api.web.errors.NullPasswordException;
 import com.listme.api.web.errors.UserNotFoundException;
 import com.listme.api.web.users.*;
 import org.springframework.http.ResponseEntity;
@@ -74,7 +75,7 @@ public class UserController{
             UserModel result = this.userService.updateUserPassword(id, updateUserPasswordDTO);
             RetrieveUserDTO response = new RetrieveUserDTO(result.getId(), result.getName(), result.getEmail(), result.getUserRole());
             return ResponseEntity.ok().body(response);
-        } catch (RuntimeException err) {
+        } catch (NullPasswordException err) {
             return ResponseEntity.badRequest().body(err.getMessage());
         }
     }
