@@ -41,11 +41,13 @@ public class UserService{
     }
 
     public UserModel updateUser(Long id, UpdateUserDTO updateUserDTO) {
-        UserModel user = this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        if(updateUserDTO.name() != null) user.setName(updateUserDTO.name());
-        if(updateUserDTO.email() != null) user.setEmail(updateUserDTO.email());
-        if(updateUserDTO.role() != null) user.setUserRole(updateUserDTO.role());
-        return this.userRepository.save(user);
+        return this.userRepository.findById(id)
+                .map(user -> {
+                    if(updateUserDTO.name() != null) user.setName(updateUserDTO.name());
+                    if(updateUserDTO.email() != null) user.setEmail(updateUserDTO.email());
+                    if(updateUserDTO.role() != null) user.setUserRole(updateUserDTO.role());
+                    return user;
+                }).orElseThrow(UserNotFoundException::new);
     }
 
     public UserModel updateUserPassword(Long id, UpdateUserPasswordDTO updateUserPasswordDTO) {

@@ -2,8 +2,6 @@ package com.listme.api.models;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-
 @Entity(name = "tb_users")
 public class UserModel{
 
