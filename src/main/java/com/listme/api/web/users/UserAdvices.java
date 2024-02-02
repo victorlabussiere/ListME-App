@@ -23,14 +23,14 @@ public class UserAdvices {
     @ResponseBody
     @ExceptionHandler(NullPasswordException.class)
     @ResponseStatus(HttpStatus.NOT_MODIFIED)
-    public String nullPasswordHandler(UserNotFoundException err) {
+    public String nullPasswordHandler(NullPasswordException err) {
         return err.getMessage();
     }
 
     @ResponseBody
     @ExceptionHandler(EmailInUseException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String emailInUseHandler(UserNotFoundException err) {
+    public String emailInUseHandler(EmailInUseException err) {
         return err.getMessage();
     }
 
