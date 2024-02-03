@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 @Entity(name = "tb_friend_list")
 public class FriendsListModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long friend_list_id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     UserModel user;
 
     public FriendsListModel() {

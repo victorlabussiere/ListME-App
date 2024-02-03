@@ -12,11 +12,11 @@ public class    FriendshipModel {
     Long friendship_id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id", nullable = false)
     private UserModel user;
 
     @ManyToOne
-    @JoinColumn(name = "friend_id")
+    @JoinColumn(name = "friend_id", nullable = false)
     private UserModel friend;
 
     public FriendshipModel() {
@@ -25,9 +25,6 @@ public class    FriendshipModel {
     public FriendshipModel(UserModel user, UserModel friend) {
         this.user = user;
         this.friend = friend;
-    }
-
-    public FriendshipModel(Long aLong, Long aLong1) {
     }
 
     public Long getFriendship_id() {

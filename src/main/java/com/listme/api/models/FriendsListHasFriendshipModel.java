@@ -9,11 +9,11 @@ public class FriendsListHasFriendshipModel {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "friends_list_id")
+    @JoinColumn(name = "friends_list_id", nullable = false)
     private FriendsListModel friendList;
 
     @ManyToOne
-    @JoinColumn(name = "friendship_id")
+    @JoinColumn(name = "friendship_id", nullable = false)
     private FriendshipModel friendship;
 
     public FriendsListHasFriendshipModel() {
