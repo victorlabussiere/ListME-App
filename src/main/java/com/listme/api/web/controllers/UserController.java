@@ -1,10 +1,10 @@
 package com.listme.api.web.controllers;
 
 import com.listme.api.models.UserModel;
+import com.listme.api.web.domains.users.*;
 import com.listme.api.web.errors.EmailInUseException;
 import com.listme.api.web.errors.NullPasswordException;
 import com.listme.api.web.errors.UserNotFoundException;
-import com.listme.api.web.users.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

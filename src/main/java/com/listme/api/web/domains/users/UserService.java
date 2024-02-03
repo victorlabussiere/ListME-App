@@ -1,4 +1,4 @@
-package com.listme.api.web.users;
+package com.listme.api.web.domains.users;
 
 import com.listme.api.models.UserModel;
 import com.listme.api.web.errors.EmailInUseException;
